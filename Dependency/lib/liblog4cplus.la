@@ -38,4 +38,4 @@ dlopen=''
 dlpreopen=''
 
 # Directory that this library needs to be installed in:
-libdir='/home/mike/log4cplus/lib'
+libdir='/home/mike/install/lib'
