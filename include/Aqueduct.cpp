@@ -1,6 +1,13 @@
 #include "Aqueduct.h"
-int Aqueduct::AqueductLog::initLogger(string apd_name,int lgr_level)
+
+Logger AqueductLog::logger;
+int AqueductLog::initLogger(std::string apd_name,int lgr_level)
 {
+    if(apd_name.empty())
+    {
+        LogLog::getLogLog()->error("log file name error");
+        return -1;
+    }
 	if(lgr_level<0 || lgr_level>6)
 	{
 		LogLog::getLogLog()->error("logger level error");
@@ -13,18 +20,13 @@ int Aqueduct::AqueductLog::initLogger(string apd_name,int lgr_level)
 	std::auto_ptr<Layout> layout(new PatternLayout(pattern));
 
 	append->setLayout(layout);
-	
-	Logger logger=Logger::getRoot();
-	logger.addAppender(append);
-	
-	logger.setLogLevel(lgr_level*10000);
-	
-	linfo(logger,"initialize logger success");
-	
-	return 0;
-}
 
-Aqueduct::AqueductLogger Aqueduct::AqueductLog::getLogger()
-{
-	return Logger::getRoot();
+	logger=Logger::getRoot();
+	logger.addAppender(append);
+
+	logger.setLogLevel(lgr_level*10000);
+
+	linfo("initialize logger success");
+
+	return 0;
 }
