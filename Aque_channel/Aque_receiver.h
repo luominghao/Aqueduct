@@ -14,6 +14,6 @@ public:
 	virtual int notifyChannel();
 	virtual int configChange();
 	virtual run_state getRunState();
-	virtual int setRunState();
+	virtual int setRunState(run_state t_state);
 	Aque_receiver();
 };
